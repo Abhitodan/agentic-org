@@ -180,6 +180,8 @@ Agent cards MUST reference skills by name and list **verification gates** before
 
 **Exit criteria:** Review skill can request impact subgraph for a diff; offline fixture shows fewer files read with equal finding coverage.
 
+**Done in tree (stdlib AST first):** `src/agentic_org/code_graph/`, skill `discovery/code-intelligence`, `repository-analysis` writes graph beside map, `code-review` optional `graph_dir` → `review_pack`, provenance EXTRACTED/INFERRED. tree-sitter multi-language and MCP `graph.*` remain follow-ups.
+
 **Sources:** [graphify](https://github.com/Graphify-Labs/graphify), [code-review-graph](https://github.com/tirth8205/code-review-graph).
 
 ---
@@ -316,6 +318,8 @@ with the persona. No exception was carved into the runner.
 | P7.4 github-release export | Ship skill packs + evals; keep research out |
 | P7.5 Starter kits | “Solo IC”, “Team lead”, “OSS maintainer” skill sets |
 | P7.6 Anti-bloat rule | Cap: no skill without script+eval; archive weak skills |
+
+**Done in tree:** `agentctl skill-install cursor|claude|codex|project` (symlink with `--copy` fallback), dry-run, docs in `SKILLS.md`. Catalog page + starter kits remain.
 
 **Sources:** [claude-skills](https://github.com/alirezarezvani/claude-skills) (structure), awesome-llm-apps (bar).
 

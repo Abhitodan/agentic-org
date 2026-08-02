@@ -177,7 +177,7 @@ Not a prompt dump. Every skill is executable software. Personas bind skills and 
 
 | Layer | Ships today |
 | ----- | ----------- |
-| **Skills** | 21 executable skills — discovery, product, planning, implementation, verification, review, ceremonies |
+| **Skills** | 31 executable skills — discovery (incl. code graph), product, planning, implementation, verification, review, delivery, ceremonies, orchestration |
 | **Personas** | 18 role cards — domain context, bound skills, ceremony participation, handoffs |
 | **Orchestration** | Mode A runner + human gates + budgets + hash-chained events |
 
@@ -234,10 +234,9 @@ More: [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md)
 
 - [x] Mode A control plane (gates, budgets, audit, checkpoints)
 - [x] Live Command Center
-- [x] 21 executable skills + 18 personas
-- [ ] Deeper code graph / impact queries
-- [ ] Delivery + orchestration skill packs (specs already in-tree)
-- [ ] Stronger install UX for coding-agent skill consumers
+- [x] 31 executable skills + 18 personas (incl. delivery + orchestration)
+- [x] Code graph / impact + review-pack (`code-intelligence`)
+- [x] `agentctl skill-install` for Cursor / Claude / Codex / project
 
 Full plan: [`docs/ROADMAP_SKILLS_AGENTS_PLATFORM.md`](docs/ROADMAP_SKILLS_AGENTS_PLATFORM.md)
 

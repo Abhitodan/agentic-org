@@ -21,23 +21,24 @@ measurable change. The judgment stays with the persona; the check is code.
 
 | Category | Purpose | Status |
 | -------- | ------- | ------ |
-| `discovery` | What exists: repository, history, dependencies, domain | 3 shipped |
+| `discovery` | What exists: repository, history, dependencies, graph | 4 shipped |
 | `product` | Backlog: stories, criteria, prioritization, readiness | 6 shipped |
 | `planning` | Sprint mechanics: capacity, estimates, dependencies, risk | 1 shipped, 3 specified |
 | `implementation` | Build under test gates | 1 shipped, 4 specified |
 | `verification` | Prove it works | 1 shipped, 4 specified |
 | `review` | Judge diffs, scope, security, architecture | 2 shipped, 2 specified |
-| `delivery` | Ship it: readiness, changelog, rollback, deployment | 4 specified |
+| `delivery` | Ship it: readiness, changelog, rollback, deployment | 4 shipped |
 | `ceremonies` | Agile cadence | 7 shipped |
-| `orchestration` | Coordinate: routing, handoffs, WIP, escalation | 5 specified |
+| `orchestration` | Coordinate: routing, handoffs, WIP, escalation | 5 shipped |
 
-## Shipped skills (21)
+## Shipped skills (31)
 
 ### discovery
 
 | Skill | Gate it enforces |
 | ----- | ---------------- |
-| `repository-analysis` | Repository map from filesystem and AST; zero inference |
+| `repository-analysis` | Repository map from filesystem and AST; also writes code graph |
+| `code-intelligence` | Persistent AST graph; impact + review-pack with provenance |
 | `commit-archaeologist` | Why code exists, from git history only |
 | `dependency-doctor` | Manifest autopsy: stdlib shadowing, unpinned, conflicts |
 
@@ -74,11 +75,26 @@ measurable change. The judgment stays with the persona; the check is code.
 | `velocity-analytics` | Forecast is an observed range, never a model |
 | `impediment-tracker` | Escalation is a function of severity and age |
 
-## Specified, not yet built (18)
+### delivery
 
-These directories exist with a `SPEC.md` stating the gate each skill will
-enforce. They are deliberately empty of scripts: an empty category is honest,
-a stub skill that returns `ok: true` is not.
+| Skill | Gate it enforces |
+| ----- | ---------------- |
+| `release-readiness` | Demo + tests + clean review + approval + rollback |
+| `deployment-verification` | Post-deploy commands ran green; hashed output |
+| `rollback-plan` | Revert target, verify step, forward-fix for irreversible |
+| `changelog-forge` | Story-traced entries; unattributed commits are gaps |
+
+### orchestration
+
+| Skill | Gate it enforces |
+| ----- | ---------------- |
+| `handoff-contract` | Required artifacts present before persona handoff |
+| `wip-limit-guard` | Per-persona / team WIP limits |
+| `work-routing` | Capability + WIP routing; unroutable named |
+| `escalation-protocol` | Budget / confidence / policy / impediment triggers |
+| `ceremony-state-machine` | Legal ceremony order + required artifacts |
+
+## Specified, not yet built
 
 | Category | Skills |
 | -------- | ------ |
@@ -86,8 +102,6 @@ a stub skill that returns `ok: true` is not.
 | `implementation` | `tdd-cycle`, `refactor-safety`, `database-migration`, `api-contract` |
 | `verification` | `test-strategy`, `edge-case-canon`, `regression-guard`, `performance-budget` |
 | `review` | `security-review`, `architecture-conformance` |
-| `delivery` | `release-readiness`, `changelog-forge`, `rollback-plan`, `deployment-verification` |
-| `orchestration` | `work-routing`, `handoff-contract`, `wip-limit-guard`, `escalation-protocol`, `ceremony-state-machine` |
 
 ## Shared primitives
 

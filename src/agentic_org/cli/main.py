@@ -17,7 +17,7 @@ from ..context import build_context
 from ..core.budget import Budget
 from ..core.store import NotFound
 from ..orchestrator.runner import PLAN_GATE, RELEASE_GATE
-from ..repo_intel.mapper import build_repo_map, save_repo_map, summarize_repo_map
+from ..repo_intel.mapper import summarize_repo_map
 from ..workspace.git_ws import GitError, GitWorkspace
 
 app = typer.Typer(help="Agentic Software Organization control CLI",
@@ -211,12 +211,212 @@ def create_feature(project: str, name: str,
 @app.command("map-repository")
 def map_repository(repo_path: str, out: Optional[str] = typer.Option(None, "--out"),
                    root: Optional[str] = root_option):
-    """Deterministically map a repository (no LLM calls)."""
-    repo_map = build_repo_map(Path(repo_path))
+    """Deterministically map a repository via the repository-analysis skill (no LLM)."""
+    ctx = build_context(root)
+    from ..skills import SkillInvocationError, invoke_skill
+
+    try:
+        result = invoke_skill(
+            ctx.root,
+            "repository-analysis",
+            args={"repo_path": repo_path, "out_dir": out},
+            events=ctx.events,
+            agent_role="repository-agent",
+        )
+    except SkillInvocationError as exc:
+        typer.echo(str(exc), err=True)
+        raise typer.Exit(1) from exc
     if out:
-        json_path, md_path = save_repo_map(repo_map, Path(out))
-        typer.echo(f"saved {json_path} and {md_path}")
-    typer.echo(summarize_repo_map(repo_map))
+        for path in result.get("artifacts") or []:
+            typer.echo(f"saved {path}")
+    typer.echo(result.get("summary") or summarize_repo_map(result.get("repo_map") or {}))
+
+
+@app.command("skill-list")
+def skill_list(root: Optional[str] = root_option,
+               project: Optional[str] = typer.Option(None, "--project"),
+               category: Optional[str] = typer.Option(
+                   None, "--category", help="Only skills in this category"),
+               persona: Optional[str] = typer.Option(
+                   None, "--persona", help="Only skills bound to this agent role"),
+               grouped: bool = typer.Option(
+                   False, "--grouped", help="Group output by category")):
+    """List installed skills (project overrides org)."""
+    ctx = build_context(root)
+    from ..skills import discover_skills
+
+    manifests = [
+        s for s in discover_skills(ctx.root, project).values()
+        if (category is None or s.category == category)
+        and (persona is None or persona in s.personas)
+    ]
+    if not grouped:
+        _echo([s.to_dict() for s in manifests])
+        return
+    by_category: dict[str, list[dict]] = {}
+    for manifest in sorted(manifests, key=lambda m: (m.category, m.name)):
+        by_category.setdefault(manifest.category or "uncategorized", []).append(
+            manifest.to_dict()
+        )
+    _echo(by_category)
+
+
+@app.command("skill-show")
+def skill_show(name: str, root: Optional[str] = root_option,
+               project: Optional[str] = typer.Option(None, "--project")):
+    """Show one skill manifest and readiness."""
+    ctx = build_context(root)
+    from ..skills import SkillNotFound, load_skill
+
+    try:
+        skill = load_skill(ctx.root, name, project)
+    except SkillNotFound as exc:
+        typer.echo(str(exc), err=True)
+        raise typer.Exit(1) from exc
+    data = skill.to_dict()
+    data["body_preview"] = skill.body[:500]
+    _echo(data)
+
+
+@app.command("skill-run")
+def skill_run(
+    name: str,
+    repo_path: Optional[str] = typer.Option(None, "--repo"),
+    out: Optional[str] = typer.Option(None, "--out"),
+    root: Optional[str] = root_option,
+    project: Optional[str] = typer.Option(None, "--project"),
+):
+    """Run a skill entrypoint (Phase 0: repository-analysis supported)."""
+    ctx = build_context(root)
+    from ..skills import SkillInvocationError, invoke_skill
+
+    args: dict = {}
+    if repo_path:
+        args["repo_path"] = repo_path
+    if out:
+        args["out_dir"] = out
+    try:
+        result = invoke_skill(
+            ctx.root,
+            name,
+            args=args,
+            events=ctx.events,
+            project_name=project,
+            agent_role="cli",
+        )
+    except SkillInvocationError as exc:
+        typer.echo(str(exc), err=True)
+        raise typer.Exit(1) from exc
+    # Avoid dumping huge repo_map to terminal by default
+    slim = {k: v for k, v in result.items() if k != "repo_map"}
+    _echo(slim)
+
+
+def _skill_eval_fixture(root: Path) -> Path:
+    fixture = root / "examples" / "enrollment-sample"
+    if fixture.is_dir():
+        return fixture
+    fixture = root / ".agent-org" / "state" / "skill-eval-fixture"
+    (fixture / "pkg").mkdir(parents=True, exist_ok=True)
+    (fixture / "pkg" / "__init__.py").write_text("", encoding="utf-8")
+    (fixture / "tests").mkdir(exist_ok=True)
+    (fixture / "tests" / "test_smoke.py").write_text(
+        "def test_ok():\n    assert True\n", encoding="utf-8"
+    )
+    (fixture / "app.py").write_text("def add(a, b):\n    return a + b\n", encoding="utf-8")
+    req = fixture / "requirements.txt"
+    if not req.is_file():
+        req.write_text("requests>=2.0\n", encoding="utf-8")
+    return fixture
+
+
+@app.command("skill-install")
+def skill_install(
+    target: str = typer.Argument(
+        ..., help="cursor | claude | codex | project"),
+    copy: bool = typer.Option(
+        False, "--copy", help="Force copy instead of symlink"),
+    dry_run: bool = typer.Option(
+        False, "--dry-run", help="Show paths without installing"),
+    root: Optional[str] = root_option,
+):
+    """Install org skills into a coding-agent skills directory."""
+    ctx = build_context(root)
+    from .skill_install import install_skills
+
+    normalized = target.strip().lower()
+    if normalized not in {"cursor", "claude", "codex", "project"}:
+        typer.echo(
+            "target must be one of: cursor, claude, codex, project", err=True,
+        )
+        raise typer.Exit(1)
+    try:
+        plan = install_skills(
+            ctx.root, normalized, copy=copy, dry_run=dry_run,  # type: ignore[arg-type]
+        )
+    except (FileNotFoundError, ValueError, OSError) as exc:
+        typer.echo(str(exc), err=True)
+        raise typer.Exit(1) from exc
+    _echo({
+        "target": plan.target,
+        "source": str(plan.source),
+        "destination": str(plan.destination),
+        "mode": plan.mode,
+        "skill_count": plan.skill_count,
+        "next": (
+            f"Point your coding agent at {plan.destination} "
+            "(symlink/copy preserves scripts + SKILL.md)."
+        ),
+    })
+
+
+@app.command("skill-eval")
+def skill_eval(
+    name: str = typer.Argument("repository-analysis", help="Skill name to eval"),
+    root: Optional[str] = root_option,
+):
+    """Run the built-in eval for a skill (offline fixtures)."""
+    ctx = build_context(root)
+    from ..skills import SkillInvocationError, invoke_skill
+
+    from .skill_evals import SKILL_EVALS
+
+    fixture = _skill_eval_fixture(ctx.root)
+    spec = SKILL_EVALS.get(name)
+    if spec is None:
+        typer.echo(
+            f"no eval registered for {name!r} yet; "
+            f"registered: {', '.join(sorted(SKILL_EVALS))}",
+            err=True,
+        )
+        raise typer.Exit(1)
+    args = spec.build_args(fixture, ctx.root)
+    expect_evidence = spec.expect_evidence
+
+    try:
+        result = invoke_skill(
+            ctx.root,
+            name,
+            args=args,
+            events=ctx.events,
+            agent_role="skill-eval",
+        )
+    except SkillInvocationError as exc:
+        typer.echo(str(exc), err=True)
+        raise typer.Exit(1) from exc
+
+    ok = result.get("evidence") == expect_evidence and spec.check(result)
+
+    _echo({
+        "skill": name,
+        "category": spec.category,
+        "passed": ok,
+        "evidence": result.get("evidence"),
+        "fixture": str(fixture),
+        "ok": result.get("ok"),
+    })
+    if not ok:
+        raise typer.Exit(1)
 
 
 @app.command()

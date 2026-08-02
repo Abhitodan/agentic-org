@@ -18,6 +18,12 @@ agentctl skill-show sprint-planning
 agentctl skill-run repository-analysis --repo path/to/repo --out .agent-org/state/maps
 agentctl skill-eval retrospective
 agentctl map-repository --repo path/to/repo      # invokes repository-analysis
+
+# Install the same skills into a coding agent (symlink, or --copy on Windows)
+agentctl skill-install cursor --dry-run
+agentctl skill-install claude
+agentctl skill-install codex --copy
+agentctl skill-install project                   # -> .agents/skills
 ```
 
 Mode A nodes call skills: `map_repository` → repository-analysis, `plan` → feature-planning, `implement` → implementation, `review` → code-review. Invocations emit `skill.started` / `skill.finished` / `skill.failed` events.
@@ -36,20 +42,23 @@ Skills in `product/`, `planning/`, and `ceremonies/` all return the same shape, 
 
 ## Coding agents (Cursor / Claude / Codex)
 
-Point the agent at the same folders — do not fork a second copy of the skill body:
+Use `agentctl skill-install` so every consumer sees the **same** scripts and `SKILL.md` files — do not hand-copy bodies into chat.
 
-| Tool | Typical path |
-| ---- | ------------ |
-| agentic-org (source of truth) | `.agent-org/skills/<name>/SKILL.md` |
-| Project override | `projects/<name>/.agents/skills/<name>/` or `.agents/skills/<name>/` |
-| Cursor / Claude style | Symlink or copy into the tool’s skills directory if required; keep scripts and network policy intact |
+| Target | Default destination |
+| ------ | ------------------- |
+| `cursor` | `~/.cursor/skills/agentic-org` |
+| `claude` | `~/.claude/skills/agentic-org` |
+| `codex` | `~/.codex/skills/agentic-org` |
+| `project` | `<org>/.agents/skills` |
 
-Rules for any consumer:
+Verify after install:
 
-1. Prefer the org skill tree; project overrides win when both exist.
-2. Respect `network: none|declared` in frontmatter — do not silently add network.
-3. Prefer calling `agentctl skill-run` / Mode A over re-implementing the script in chat.
-4. Package-bundled fallbacks live in `src/agentic_org/skills/bundled/` for fresh installs and tests.
+1. Destination contains categorized folders (`discovery/`, `product/`, …) with `SKILL.md` + `scripts/`.
+2. `agentctl skill-list` still resolves the org tree (install is a projection, not a fork).
+3. Respect `network: none|declared` — never silently add network.
+4. Prefer `agentctl skill-run` / Mode A over re-implementing scripts in chat.
+
+Package-bundled fallbacks live in `src/agentic_org/skills/bundled/` for fresh installs and tests.
 
 ## Adding a skill
 
