@@ -13,6 +13,7 @@
   <a href="#try-it-in-2-minutes"><img src="https://img.shields.io/badge/try%20it-2%20minutes-1a7f37?style=flat-square" alt="Try it" /></a>
   <a href="#use-case-bulk-member-import"><img src="https://img.shields.io/badge/use%20case-bulk%20import-0969da?style=flat-square" alt="Use case" /></a>
   <a href="#architecture--flow"><img src="https://img.shields.io/badge/diagrams-architecture%20%2B%20flow-6e7781?style=flat-square" alt="Diagrams" /></a>
+  <a href="#skills--personas--orchestration"><img src="https://img.shields.io/badge/skills-21%20executable-007AFF?style=flat-square" alt="Skills" /></a>
   <a href="#four-guarantees"><img src="https://img.shields.io/badge/fail%20closed-no%20fake%20LLM%20wins-cf222e?style=flat-square" alt="Fail closed" /></a>
   <img src="https://img.shields.io/badge/python-3.11%2B-3776ab?style=flat-square" alt="Python 3.11+" />
 </p>
@@ -60,11 +61,35 @@ agentctl / command-center UI
    FastAPI + context wiring ──► SQLite (events, workflows, budgets)
         │
         ▼
-   LangGraph Mode A runner ──► repo intel, feature brain, model gateway
+   LangGraph Mode A runner ──► skills, personas, model gateway
         │
         ▼
    Target git repository (checkpoints / worktrees)
 ```
+
+## Skills, personas, orchestration
+
+Every skill ships a deterministic script and a registered eval. Personas bind those skills and list gates that must pass before they commit work. Orchestration coordinates the loop without skipping humans.
+
+<p align="center">
+  <img src="docs/assets/showcase/07-skill-catalog.png" alt="Skill catalog across nine lifecycle categories" width="100%" />
+</p>
+
+<p align="center">
+  <img src="docs/assets/showcase/08-agent-personas.png" alt="Eighteen agent personas with bound skills and gates" width="100%" />
+</p>
+
+<p align="center">
+  <img src="docs/assets/showcase/09-orchestration.png" alt="Orchestration: Mode A runner coordinating skills, personas, gates, budgets, audit, git" width="100%" />
+</p>
+
+| Layer | What ships today |
+| ----- | ---------------- |
+| **Skills** | 21 executable skills across discovery, product, planning, implementation, verification, review, ceremonies |
+| **Personas** | 18 role cards with domain context, bound skills, ceremony participation, handoffs |
+| **Orchestration** | Mode A runner + human gates + budgets + hash-chained events |
+
+Catalog: [`docs/SKILL_CATALOG.md`](docs/SKILL_CATALOG.md) · Install notes: [`docs/SKILLS.md`](docs/SKILLS.md)
 
 ## Live Command Center (real UI)
 

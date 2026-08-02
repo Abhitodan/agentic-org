@@ -31,6 +31,12 @@ rows marked **Present**.
 | Event secret redaction | `core/redact.py` | Yes | Phase 1 |
 | Path grounding report | `coding/grounding.py` | Yes | charter/plan artifacts |
 | Vendored React UMD | `apps/command-center/vendor` | Yes | no unpkg CDN |
+| Skill loader / invoke | `skills.invoke_skill` | Yes | `skills/{schema,loader,runner}.py` |
+| Skill CLI | `skill-list` / `skill-show` / `skill-run` / `skill-eval` | Yes | `cli/main.py` |
+| Skill `repository-analysis` script | `.agent-org/skills/…` + `skills/bundled/…` | Yes | Mode A map node; empty org roots fall back to package bundle |
+| Phase 2 SWE skills | feature-planning, implementation, code-review, scope-creep, commit-archaeologist, dependency-doctor, test-evidence | Yes | Mode A plan/implement/review; `agentctl skill-eval` |
+| Mode A `review` node | `node_review` → `code-review` skill | Yes | Between implement and merge |
+| Rules pack | `.agent-org/rules/{common,python}` | Yes | Layered standards (common + stack overlays); see `research/HARNESS_PATTERNS.md` |
 | Dense cloud embeddings | — | No | sparse-TF only |
 | SSO / multi-tenant | — | No | local-trust MVP |
 

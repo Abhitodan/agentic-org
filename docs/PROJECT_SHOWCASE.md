@@ -23,12 +23,25 @@ refuses to invent LLM output when no model is configured.
 | Irreversible edits | Hope / manual undo | Git checkpoint tags + restore |
 | Fake success | “Done” without evidence | `BLOCKED` when model unavailable |
 
+## Visual story (README assets)
+
+White-and-blue product visuals live under [`assets/showcase/`](assets/showcase/):
+
+| Asset | Shows |
+| ----- | ----- |
+| `03-mode-a-control-plane.png` | Hero: humans approve, agents execute |
+| `07-skill-catalog.png` | Nine categories, executable skills only |
+| `08-agent-personas.png` | 18 personas with bound skills and gates |
+| `09-orchestration.png` | Mode A runner coordinating the loop |
+
 ## Key concepts
 
 - **Mode A** — Existing-feature vertical slice through planning.
+- **Skill catalog** — 21 executable skills (`docs/SKILL_CATALOG.md`); script + eval or it does not ship.
+- **Personas** — 18 role cards with domain context, bound skills, ceremony role, handoffs.
 - **Feature brain** — 22-section git-versioned markdown/yaml memory per feature.
 - **Human gate** — Explicit approval before planning continues.
-- **Governance tree** — `.agent-org/` constitution, policies, role docs (design intent; not all executable yet).
+- **Governance tree** — `.agent-org/` constitution, policies, role docs, categorized skills.
 
 ## Repository architecture
 

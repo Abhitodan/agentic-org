@@ -1,38 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="560" viewBox="0 0 1280 560" role="img" aria-labelledby="t d">
-  <title id="t">Before vs after agentic-org</title>
-  <desc id="d">Left: chaotic ad-hoc agent chat with no trail. Right: budgeted auditable Mode A control plane.</desc>
-  <rect width="1280" height="560" fill="#f4f6f8"/>
-  <!-- BEFORE -->
-  <rect x="40" y="40" width="560" height="480" rx="20" fill="#fff" stroke="#d8dee6"/>
-  <text x="70" y="90" fill="#b42318" font-family="Segoe UI,sans-serif" font-size="18" font-weight="700" letter-spacing="2">BEFORE</text>
-  <text x="70" y="130" fill="#1f2328" font-family="Segoe UI,sans-serif" font-size="28" font-weight="700">Ad-hoc agent chat</text>
-  <text x="70" y="168" fill="#656d76" font-family="Segoe UI,sans-serif" font-size="16">No budget · no gate · no rollback</text>
-  <g font-family="Consolas,monospace" font-size="14">
-    <rect x="70" y="200" width="500" height="44" rx="8" fill="#f6f8fa" stroke="#d0d7de"/>
-    <text x="90" y="227" fill="#656d76">just vibe code this feature&</text>
-    <rect x="70" y="256" width="500" height="44" rx="8" fill="#fff5f5" stroke="#ffcecb"/>
-    <text x="90" y="283" fill="#b42318">silent spend · lost context · fake done</text>
-    <rect x="70" y="312" width="500" height="44" rx="8" fill="#fff5f5" stroke="#ffcecb"/>
-    <text x="90" y="339" fill="#b42318">cannot prove what changed or why</text>
-    <rect x="70" y="368" width="500" height="44" rx="8" fill="#fff5f5" stroke="#ffcecb"/>
-    <text x="90" y="395" fill="#b42318">no human approval before merge</text>
-  </g>
-  <text x="70" y="470" fill="#8b949e" font-family="Segoe UI,sans-serif" font-size="14">Hope is not a control plane.</text>
-
-  <!-- AFTER -->
-  <rect x="680" y="40" width="560" height="480" rx="20" fill="#101418" stroke="#2d3a46"/>
-  <text x="710" y="90" fill="#7dd3a7" font-family="Segoe UI,sans-serif" font-size="18" font-weight="700" letter-spacing="2">AFTER</text>
-  <text x="710" y="130" fill="#f2f5f7" font-family="Segoe UI,sans-serif" font-size="28" font-weight="700">agentic-org Mode A</text>
-  <text x="710" y="168" fill="#a9b7c4" font-family="Segoe UI,sans-serif" font-size="16">Budgeted · gated · reversible · auditable</text>
-  <g font-family="Segoe UI,sans-serif" font-size="15">
-    <rect x="710" y="200" width="500" height="44" rx="8" fill="#1b242c" stroke="#2d3a46"/>
-    <text x="730" y="227" fill="#e8eef7">Human gate before plan / release</text>
-    <rect x="710" y="256" width="500" height="44" rx="8" fill="#1b242c" stroke="#2d3a46"/>
-    <text x="730" y="283" fill="#e8eef7">Hard USD stop in Guardrails</text>
-    <rect x="710" y="312" width="500" height="44" rx="8" fill="#1b242c" stroke="#2d3a46"/>
-    <text x="730" y="339" fill="#e8eef7">Git checkpoints + revert</text>
-    <rect x="710" y="368" width="500" height="44" rx="8" fill="#1b242c" stroke="#2d3a46"/>
-    <text x="730" y="395" fill="#e8eef7">Hash-chained events · agentctl verify</text>
-  </g>
-  <text x="710" y="470" fill="#8fd3ff" font-family="Segoe UI,sans-serif" font-size="14">Evidence over vibes.</text>
-</svg>
