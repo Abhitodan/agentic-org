@@ -1,7 +1,7 @@
 # agentic-org
 
 <p align="center">
-  <img src="docs/assets/hero-control-plane.svg" alt="agentic-org Mode A control plane: Humans approve. Agents execute. Everything leaves a trail." width="100%" />
+  <img src="docs/assets/showcase/03-mode-a-control-plane.png" alt="Mode A control plane: Humans approve. Agents execute. Every action leaves a verifiable trail." width="100%" />
 </p>
 
 <p align="center">
@@ -12,6 +12,7 @@
 <p align="center">
   <a href="#try-it-in-2-minutes"><img src="https://img.shields.io/badge/try%20it-2%20minutes-1a7f37?style=flat-square" alt="Try it" /></a>
   <a href="#use-case-bulk-member-import"><img src="https://img.shields.io/badge/use%20case-bulk%20import-0969da?style=flat-square" alt="Use case" /></a>
+  <a href="#architecture--flow"><img src="https://img.shields.io/badge/diagrams-architecture%20%2B%20flow-6e7781?style=flat-square" alt="Diagrams" /></a>
   <a href="#four-guarantees"><img src="https://img.shields.io/badge/fail%20closed-no%20fake%20LLM%20wins-cf222e?style=flat-square" alt="Fail closed" /></a>
   <img src="https://img.shields.io/badge/python-3.11%2B-3776ab?style=flat-square" alt="Python 3.11+" />
 </p>
@@ -23,11 +24,11 @@ Not a chat wrapper. A **workflow control plane** so humans and agents can ship f
 ## The difference (why people switch)
 
 <p align="center">
-  <img src="docs/assets/showcase/before-vs-after.svg" alt="Before ad-hoc agent chat vs after agentic-org Mode A control plane" width="100%" />
+  <img src="docs/assets/showcase/01-before-after.png" alt="Before ad-hoc agent chat vs after agentic-org Mode A" width="100%" />
 </p>
 
 <p align="center">
-  <img src="docs/assets/showcase/how-it-helps.svg" alt="What it does, how it works, how it helps" width="100%" />
+  <img src="docs/assets/showcase/02-how-it-helps.png" alt="agentic-org in one view: what, how, and how it helps" width="100%" />
 </p>
 
 | Without agentic-org | With agentic-org |
@@ -37,6 +38,33 @@ Not a chat wrapper. A **workflow control plane** so humans and agents can ship f
 | “Done” with no proof | Hash-chained events + `agentctl verify` |
 | Hard to undo agent edits | Git checkpoints + one-click revert |
 | Agents keep going past judgment calls | Plan / release **cannot** bypass humans |
+
+## Architecture & flow
+
+<p align="center">
+  <img src="docs/assets/showcase/04-system-architecture.png" alt="System architecture: operators, orchestration, governance, evidence, git" width="100%" />
+</p>
+
+<p align="center">
+  <img src="docs/assets/showcase/05-mode-a-flow.png" alt="Mode A workflow with human gates and loopback" width="100%" />
+</p>
+
+<p align="center">
+  <img src="docs/assets/showcase/06-evidence-path.png" alt="Evidence path from action to agentctl verify" width="100%" />
+</p>
+
+```text
+agentctl / command-center UI
+        │
+        ▼
+   FastAPI + context wiring ──► SQLite (events, workflows, budgets)
+        │
+        ▼
+   LangGraph Mode A runner ──► repo intel, feature brain, model gateway
+        │
+        ▼
+   Target git repository (checkpoints / worktrees)
+```
 
 ## Live Command Center (real UI)
 
@@ -141,23 +169,6 @@ copy .env.example .env
 - **Leads / staff engineers:** See cost, gates, and checkpoints before agent code lands on main.
 - **ICs using coding agents:** Keep a reversible trail instead of a chat scrollback.
 - **Teams evaluating “agentic” tools:** Fail-closed behavior is testable offline — clone and run without buying a model key.
-
-## Architecture overview
-
-```text
-agentctl / command-center UI
-        │
-        ▼
-   FastAPI + context wiring ──► SQLite (events, workflows, budgets)
-        │
-        ▼
-   LangGraph Mode A runner ──► repo intel, feature brain, model gateway
-        │
-        ▼
-   Target git repository (checkpoints / worktrees)
-```
-
-More: [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) · [docs/PROJECT_SHOWCASE.md](docs/PROJECT_SHOWCASE.md) · [docs/RUNBOOK.md](docs/RUNBOOK.md)
 
 ## Limitations
 
