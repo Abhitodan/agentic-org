@@ -1,0 +1,35 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Approval",
+  "type": "object",
+  "required": [
+    "id",
+    "workflow_id",
+    "gate",
+    "status"
+  ],
+  "properties": {
+    "id": {
+      "type": "string"
+    },
+    "workflow_id": {
+      "type": "string"
+    },
+    "gate": {
+      "type": "string"
+    },
+    "status": {
+      "enum": [
+        "pending",
+        "approved",
+        "rejected"
+      ]
+    },
+    "decided_by": {
+      "type": [
+        "string",
+        "null"
+      ]
+    }
+  }
+}

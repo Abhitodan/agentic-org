@@ -1,0 +1,7 @@
+id: feat_710e9d6895ee465695c6
+name: bulk-member-import
+objective: Add bulk member import supporting large CSV files, validation, progress
+  tracking, partial failure handling, retry, audit history, and defined performance
+  requirements
+created_at: '2026-07-31T18:11:29.950+00:00'
+state: DRAFT

@@ -1,0 +1,19 @@
+# Model routing — Groq OpenAI-compatible API (fallback when Gemini quota fails).
+# Credentials: GROQ_API_KEY in .env (gsk_…). Get a key: https://console.groq.com/keys
+# To switch back to Gemini: provider: gemini and GEMINI_API_KEY.
+provider: groq
+base_url: https://api.groq.com/openai/v1
+classes:
+  fast:
+    model: llama-3.1-8b-instant
+    input_per_1m_usd: 0.05
+    output_per_1m_usd: 0.08
+  standard:
+    model: llama-3.3-70b-versatile
+    input_per_1m_usd: 0.59
+    output_per_1m_usd: 0.79
+  strong:
+    model: llama-3.3-70b-versatile
+    input_per_1m_usd: 0.59
+    output_per_1m_usd: 0.79
+    expensive: true

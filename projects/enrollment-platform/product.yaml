@@ -1,0 +1,15 @@
+name: enrollment-platform
+shape: mono
+components:
+- id: main
+  name: Main
+  kind: main
+  path: C:\Users\abhit\PycharmProjects\agentic-org\examples\enrollment-sample
+  default_branch: main
+  test_command: null
+  order_hint: 10
+policies:
+  suggest_only: true
+  human_gates:
+  - plan-approval
+  - release-approval

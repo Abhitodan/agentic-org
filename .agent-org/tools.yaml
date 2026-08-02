@@ -1,0 +1,16 @@
+# Least-privilege toolsets per agent role
+# An agent may only call tools listed for its role.
+toolsets:
+  intake-agent: [read_brain, read_repo_map]
+  repository-agent: [map_repository, read_files]
+  product-manager-agent: [read_brain, read_repo_map, model_complete]
+  planning-agent: [read_brain, read_charter, model_complete]
+  frontend-agent: [worktree_edit, run_tests]
+  backend-agent: [worktree_edit, run_tests]
+  database-agent: [worktree_edit, run_migrations_dry_run]
+  testing-agent: [worktree_edit, run_tests]
+  reviewer-agent: [read_diff, read_tests, model_complete]
+  security-agent: [read_diff, read_dependencies, model_complete]
+  cost-governor-agent: [read_events, read_budgets]
+  release-agent: [read_checklist, tag_release]
+destructive_tools: [force_push, drop_schema, deploy_production]

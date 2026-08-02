@@ -1,0 +1,11 @@
+.venv/
+__pycache__/
+*.pyc
+*.egg-info/
+.pytest_cache/
+.agent-org/state/
+.agent-org/worktrees/
+examples/enrollment-sample/
+.env
+.idea/
+.vscode/

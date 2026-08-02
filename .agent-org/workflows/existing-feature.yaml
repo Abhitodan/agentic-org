@@ -1,0 +1,42 @@
+description: 'Mode A: feature in an existing repository (MVP vertical slice)'
+states:
+- DRAFT
+- INTAKE
+- DISCOVERY
+- RESEARCHING
+- OPTIONS_READY
+- AWAITING_DECISION
+- APPROVED
+- PLANNED
+- SPRINT_READY
+- IMPLEMENTING
+- INTEGRATING
+- VALIDATING
+- REVIEWING
+- AWAITING_APPROVAL
+- READY_FOR_RELEASE
+- RELEASING
+- OBSERVING
+- COMPLETED
+nodes:
+- intake
+- map_repository
+- create_brain
+- draft_charter
+- request_decision
+- plan
+- implement
+- merge
+- request_release
+- release
+human_gates:
+- gate: plan-approval
+  between:
+  - AWAITING_DECISION
+  - APPROVED
+- gate: release-approval
+  between:
+  - AWAITING_APPROVAL
+  - READY_FOR_RELEASE
+implemented: true
+notes: "Runner loads this YAML and refuses other kinds until implemented: true."

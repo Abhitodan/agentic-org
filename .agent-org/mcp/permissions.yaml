@@ -1,0 +1,8 @@
+grants:
+- id: grant-local-org-repo-summary
+  server: local-org
+  tools:
+  - repo_summary
+  roles:
+  - repository-agent
+  effect: allow

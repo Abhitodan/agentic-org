@@ -1,0 +1,47 @@
+{
+  "feature": "bulk-member-import",
+  "project": "enrollment-platform",
+  "documents": [
+    {
+      "kind": "brain",
+      "path": "FEATURE_BRAIN.md",
+      "status": "draft",
+      "updated_at": "2026-08-02T02:51:36.344+00:00",
+      "source": "maintain",
+      "title": "Feature Brain: bulk-member-import"
+    },
+    {
+      "kind": "repo-map",
+      "path": "artifacts/repo-map.md",
+      "status": "draft",
+      "updated_at": "2026-08-02T02:51:36.354+00:00",
+      "source": "maintain",
+      "title": "Repository Map"
+    }
+  ],
+  "updated_at": "2026-08-02T02:51:36.354+00:00",
+  "brain_sections": [
+    "Objective",
+    "Users and Expected Value",
+    "Scope and Exclusions",
+    "Acceptance Criteria",
+    "Current State",
+    "Repository Components",
+    "Requirements",
+    "Assumptions",
+    "Open Questions",
+    "Decisions",
+    "Architecture Impact",
+    "Dependencies",
+    "Risks",
+    "Experiments",
+    "Agent Sessions",
+    "Code Changes",
+    "Tests",
+    "Metrics",
+    "Review Findings",
+    "Deployment History",
+    "Incidents",
+    "Lessons Learned"
+  ]
+}

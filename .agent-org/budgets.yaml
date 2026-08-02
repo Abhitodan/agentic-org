@@ -1,0 +1,15 @@
+# Default budgets by workflow kind
+defaults:
+  maximum_input_tokens: 200000
+  maximum_output_tokens: 50000
+  maximum_tool_calls: 100
+  maximum_iterations: 12
+  maximum_wall_clock_minutes: 60
+  maximum_cost_usd: 5.0
+  expensive_model_call_limit: 3
+  human_approval_threshold_usd: 2.0
+existing-feature:
+  maximum_cost_usd: 8.0
+experiment:
+  maximum_cost_usd: 2.0
+  maximum_iterations: 6

@@ -1,0 +1,7 @@
+# Agent organization registry
+organization: agentic-org
+agents_dir: agents/
+skills_dir: skills/
+workflows_dir: workflows/
+default_workflow: existing-feature
+protected_branches: [main, master]

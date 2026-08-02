@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Workflow",
+  "type": "object",
+  "required": [
+    "id",
+    "feature_id",
+    "kind",
+    "state"
+  ],
+  "properties": {
+    "id": {
+      "type": "string"
+    },
+    "feature_id": {
+      "type": "string"
+    },
+    "kind": {
+      "type": "string"
+    },
+    "state": {
+      "type": "string"
+    },
+    "budget": {
+      "$ref": "budget.schema.json"
+    }
+  }
+}

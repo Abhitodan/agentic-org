@@ -1,0 +1,45 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Experiment",
+  "type": "object",
+  "required": [
+    "hypothesis",
+    "baseline",
+    "change",
+    "metrics",
+    "decision"
+  ],
+  "properties": {
+    "hypothesis": {
+      "type": "string"
+    },
+    "baseline": {
+      "type": "string"
+    },
+    "change": {
+      "type": "string"
+    },
+    "metrics": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "decision": {
+      "enum": [
+        "KEEP",
+        "REVISE",
+        "REVERT"
+      ]
+    },
+    "evidence": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "cost_usd": {
+      "type": "number"
+    }
+  }
+}

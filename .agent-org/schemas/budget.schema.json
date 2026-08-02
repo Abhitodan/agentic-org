@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Budget",
+  "type": "object",
+  "properties": {
+    "maximum_input_tokens": {
+      "type": "integer"
+    },
+    "maximum_output_tokens": {
+      "type": "integer"
+    },
+    "maximum_tool_calls": {
+      "type": "integer"
+    },
+    "maximum_iterations": {
+      "type": "integer"
+    },
+    "maximum_wall_clock_minutes": {
+      "type": "integer"
+    },
+    "maximum_cost_usd": {
+      "type": "number"
+    },
+    "expensive_model_call_limit": {
+      "type": "integer"
+    },
+    "human_approval_threshold_usd": {
+      "type": "number"
+    }
+  }
+}

@@ -1,0 +1,4 @@
+servers:
+- name: local-org
+  description: Built-in read-only org/repo summary (in-process)
+  transport: inprocess
