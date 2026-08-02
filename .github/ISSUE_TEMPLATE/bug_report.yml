@@ -1,0 +1,34 @@
+name: Bug report
+description: Something failed while trying agentic-org (install, run, gate, verify).
+title: "[bug] "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for reporting. Fail-closed behavior is a feature — still help us fix real defects.
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened
+      description: Expected vs actual.
+    validations:
+      required: true
+  - type: textarea
+    id: repro
+    attributes:
+      label: Reproduce
+      description: Exact commands (prefer the 2-minute demo path).
+      render: bash
+    validations:
+      required: true
+  - type: input
+    id: os
+    attributes:
+      label: OS
+      placeholder: Windows 11 / macOS / Ubuntu
+  - type: textarea
+    id: verify
+    attributes:
+      label: agentctl verify output (if relevant)
+      render: text

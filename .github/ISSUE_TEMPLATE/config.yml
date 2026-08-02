@@ -1,0 +1,5 @@
+blank_issues_enabled: true
+contact_links:
+  - name: Show and tell
+    url: https://github.com/Abhitodan/agentic-org/discussions
+    about: Share a run, a screenshot, or how you wired agentic-org into your team.
