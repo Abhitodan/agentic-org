@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="420" viewBox="0 0 1280 420" role="img" aria-labelledby="t d">
+  <title id="t">How agentic-org helps</title>
+  <desc id="d">Three panels: what it does, how it works, how it helps teams.</desc>
+  <rect width="1280" height="420" fill="#0f1419"/>
+  <g font-family="Segoe UI,sans-serif">
+    <rect x="40" y="40" width="380" height="340" rx="18" fill="#182029" stroke="#2d3a46"/>
+    <text x="70" y="90" fill="#8fd3ff" font-size="14" letter-spacing="2">WHAT</text>
+    <text x="70" y="130" fill="#f2f5f7" font-size="26" font-weight="700">Run feature work</text>
+    <text x="70" y="162" fill="#f2f5f7" font-size="26" font-weight="700">as a governed workflow</text>
+    <text x="70" y="210" fill="#a9b7c4" font-size="16">Mode A: intake ’ map ’ brain</text>
+    <text x="70" y="236" fill="#a9b7c4" font-size="16">’ human gate ’ plan ’ implement</text>
+    <text x="70" y="262" fill="#a9b7c4" font-size="16">’ merge ’ release gate</text>
+    <text x="70" y="320" fill="#7dd3a7" font-size="15">Local-first. Your repo stays yours.</text>
+
+    <rect x="450" y="40" width="380" height="340" rx="18" fill="#182029" stroke="#2d3a46"/>
+    <text x="480" y="90" fill="#8fd3ff" font-size="14" letter-spacing="2">HOW</text>
+    <text x="480" y="130" fill="#f2f5f7" font-size="26" font-weight="700">Enforce the four</text>
+    <text x="480" y="162" fill="#f2f5f7" font-size="26" font-weight="700">guarantees in code</text>
+    <text x="480" y="210" fill="#a9b7c4" font-size="16">Fail closed when models are down</text>
+    <text x="480" y="236" fill="#a9b7c4" font-size="16">Budget object hard-stops spend</text>
+    <text x="480" y="262" fill="#a9b7c4" font-size="16">Git checkpoints before edits</text>
+    <text x="480" y="288" fill="#a9b7c4" font-size="16">Hash-chained audit events</text>
+    <text x="480" y="320" fill="#7dd3a7" font-size="15">Command Center makes it visible.</text>
+
+    <rect x="860" y="40" width="380" height="340" rx="18" fill="#182029" stroke="#2d3a46"/>
+    <text x="890" y="90" fill="#8fd3ff" font-size="14" letter-spacing="2">HELP</text>
+    <text x="890" y="130" fill="#f2f5f7" font-size="26" font-weight="700">Ship with trust,</text>
+    <text x="890" y="162" fill="#f2f5f7" font-size="26" font-weight="700">not vibes</text>
+    <text x="890" y="210" fill="#a9b7c4" font-size="16">Catch runaway cost early</text>
+    <text x="890" y="236" fill="#a9b7c4" font-size="16">Require humans on plan/release</text>
+    <text x="890" y="262" fill="#a9b7c4" font-size="16">Revert bad agent edits safely</text>
+    <text x="890" y="288" fill="#a9b7c4" font-size="16">Prove what happened later</text>
+    <text x="890" y="320" fill="#7dd3a7" font-size="15">Clone ’ run ’ see the gate.</text>
+  </g>
+</svg>
