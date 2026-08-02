@@ -18,7 +18,7 @@
 
 <p align="center">
   <img src="https://img.shields.io/badge/python-3.11%2B-3776ab?style=flat-square" alt="Python 3.11+" />
-  <img src="https://img.shields.io/badge/skills-21%20executable-007AFF?style=flat-square" alt="21 skills" />
+  <img src="https://img.shields.io/badge/skills-31%20executable-007AFF?style=flat-square" alt="31 skills" />
   <img src="https://img.shields.io/badge/personas-18%20roles-6e7781?style=flat-square" alt="18 personas" />
   <img src="https://img.shields.io/badge/fail%20closed-no%20fake%20LLM%20wins-cf222e?style=flat-square" alt="Fail closed" />
   <img src="https://img.shields.io/badge/local%20first-no%20cloud%20required-1a7f37?style=flat-square" alt="Local first" />
